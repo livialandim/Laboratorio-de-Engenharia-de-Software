@@ -1,0 +1,33 @@
+<!--
+Implemente um script JavaScript que solicite ao usuário um número inteiro
+positivo. Assim que o usuário digitar um valor válido informe em uma janela
+de alerta se o número é ou não primo.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript">
+        let numero = prompt("Informe um número inteiro positivo: ");
+        let primo = true;
+        for (i = 2; i < numero; i++) {
+            if (numero % i == 0) {
+                primo = false;
+                break;
+            }
+        }
+
+        if (primo) {
+            alert(numero + " é primo!");
+        } else {
+            alert(numero + " não é primo!");
+        }
+
+    </script>
+    <title>Exercício 2</title>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!--
+Implemente um script JavaScript que solicite ao usuário um número inteiro
+positivo. Assim que o usuário digitar um valor válido calcule o fatorial do
+mesmo e exiba o resultado em uma janela de alerta.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript">
+        let numero = prompt("Informe um número inteiro positivo: ");
+        let fatorial = numero;
+
+        for(i = numero; i <= 1; i--) {
+            fatorial = fatorial * i;
+        }
+
+        alert(fatorial);
+    </script>
+    <title>Exercício 3</title>
+</head>
+<body>
+    
+</body>
+</html>
