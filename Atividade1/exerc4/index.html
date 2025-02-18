@@ -1,0 +1,37 @@
+<!--
+Implemente um script JavaScript que solicite ao usuário a entrada de um
+dado via teclado. Em seguida, pergunte se o usuário deseja verificar o tipo do
+dado informado. Caso o usuário confirme escreva no corpo da página o tipo
+do dado (Number, String, etc.) caso contrário escreva a mensagem: “Obrigado
+por visitar esta página”.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let dado = prompt("Informe um dado: ");
+
+            let dadoConvertido = isNaN(dado) ? dado : Number(dado);
+
+            if (confirm("Deseja verificar o tipo de dado? ")) {
+                let tipo = isNaN(dadoConvertido) ? 'string' : 'number';
+                document.body.innerHTML = "O tipo do dado informado é: " + tipo;
+            } else {
+                document.body.innerHTML = "Obrigado por visitar esta página";
+            }
+        });
+    </script>
+    <title>Exercício 4</title>
+
+</head>
+
+<body>
+
+</body>
+
+</html>
