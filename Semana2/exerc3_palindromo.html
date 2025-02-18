@@ -1,0 +1,32 @@
+<!--
+Implemente um script que leia uma palavra ou frase de um
+campo de texto e exiba em uma janela de alert se o texto é ou
+não um palíndromo.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let string = prompt("Informe uma palavra ou frase para verificar se é um palíndromo: ");
+
+            let stringFiltrada = string.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+
+            let stringInvertida = stringFiltrada.split('').reverse().join('');
+
+            if (stringFiltrada == stringInvertida) {
+                alert("É um palíndromo");
+            } else {
+                alert("Não é um palíndromo");
+            }
+        });
+    </script>
+    <title>Exercício 3</title>
+</head>
+<body>
+    
+</body>
+</html>
