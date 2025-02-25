@@ -1,0 +1,99 @@
+<!--
+Implemente um formulario HTML para input das características de um 
+carro: marca, modelo, ano, cor, kilometragem, valor_fipe
+
+Implemente um script que armazene as características preenchidas no 
+formulário em um objeto e que contenha, além das propriedades acima, dois 
+métodos:
+anosUtilizacao() – deve retornar quantos anos de utilização o veículo 
+possui;
+valorMercado() – deve retornar o valor de mercado considerando a 
+seguinte regra:
+
+carros que rodam até 30.000 km/ano – 110% do valor_fipe
+carros que rodam entre 30.000 e 50.000 km/ano – 100% do valor_fipe
+carros que rodam mais que 50.000 km/ano – 90% do valor_fipe
+
+Preenchidos os campos os métodos criados devem ser utilizados para exibir 
+quantos anos o veículo tem de utilização juntamente com seu valor de 
+mercado.
+-->
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício 2</title>
+</head>
+
+<body>
+
+    <h2>Cadastro de Carro</h2>
+    <form id="carro">
+        <label>Marca: <input type="text" id="marca" required></label>
+        <label>Modelo: <input type="text" id="modelo" required></label>
+        <label>Ano: <input type="number" id="ano" required></label>
+        <label>Cor: <input type="text" id="cor" required></label>
+        <label>Quilometragem: <input type="number" id="km" required></label>
+        <label>Valor FIPE: <input type="number" id="valor_fipe" required></label>
+        <button type="submit">Cadastrar</button>
+    </form>
+
+    <h3>Resultado:</h3>
+    <p id="resultado"></p>
+
+    <script>
+        function Carro(marca, modelo, ano, cor, km, valorFipe) {
+            this.marca = marca;
+            this.modelo = modelo;
+            this.ano = ano;
+            this.cor = cor;
+            this.km = km;
+            this.valorFipe = valorFipe;
+
+            this.anosUtilizacao = function () {
+                const anoAtual = new Date().getFullYear();
+                return anoAtual - this.ano;
+            };
+
+            this.valorMercado = function () {
+                const anos = this.anosUtilizacao();
+
+                let kmPorAno = this.km / anos;
+
+                if (kmPorAno <= 30000) {
+                    return this.valorFipe * 1.1;
+                } else if (kmPorAno <= 50000) {
+                    return this.valorFipe;
+                } else {
+                    return this.valorFipe * 0.9;
+                }
+            };
+        }
+
+        document.getElementById("carro").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            let marca = document.getElementById("marca").value.trim();
+            let modelo = document.getElementById("modelo").value.trim();
+            let ano = parseInt(document.getElementById("ano").value);
+            let cor = document.getElementById("cor").value.trim();
+            let km = parseFloat(document.getElementById("km").value);
+            let valorFipe = parseFloat(document.getElementById("valor_fipe").value);
+
+            let carro = new Carro(marca, modelo, ano, cor, km, valorFipe);
+
+            document.getElementById("resultado").innerHTML = `
+                <strong>${carro.marca} ${carro.modelo} (${carro.ano}) </strong>
+                | <strong>Cor:</strong> ${carro.cor}
+                | <strong>Quilometragem:</strong> ${carro.km} km
+                | <strong>Anos de utilização:</strong> ${carro.anosUtilizacao()} anos
+                | <strong>Valor de mercado:</strong> R$ ${carro.valorMercado().toFixed(2)}
+            `;
+        });
+    </script>
+
+</body>
+</html>
