@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador de Pessoas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f9fa;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        #app {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 400px;
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script>
+        const app = document.getElementById("app");
+
+        function criarElemento(tag, classes, texto) {
+            const elemento = document.createElement(tag);
+            if (classes) elemento.className = classes;
+            if (texto) elemento.textContent = texto;
+            return elemento;
+        }
+
+        function criarBotao(texto, classe, evento) {
+            const botao = criarElemento("button", classe, texto);
+            botao.onclick = evento;
+            return botao;
+        }
+
+        let qtdHomens = 0;
+        let qtdMulheres = 0;
+
+        function atualizarTotal() {
+            totalContador.textContent = qtdHomens + qtdMulheres;
+        }
+
+        function alterarContagem(tipo, operacao) {
+            if (tipo === "homens") {
+                qtdHomens = operacao === "+" ? qtdHomens + 1 : Math.max(0, qtdHomens - 1);
+                contadorHomens.textContent = qtdHomens;
+            } else {
+                qtdMulheres = operacao === "+" ? qtdMulheres + 1 : Math.max(0, qtdMulheres - 1);
+                contadorMulheres.textContent = qtdMulheres;
+            }
+            atualizarTotal();
+        }
+
+        function resetContador() {
+            qtdHomens = 0;
+            qtdMulheres = 0;
+            contadorHomens.textContent = qtdHomens;
+            contadorMulheres.textContent = qtdMulheres;
+            atualizarTotal();
+        }
+
+        const botaoReset = criarElemento("i", "fa-solid fa-rotate-right reset-btn");
+        botaoReset.onclick = resetContador;
+
+        const totalContainer = criarElemento("div", "total");
+        totalContainer.appendChild(criarElemento("h2", "", "Total"));
+        const totalContador = criarElemento("p", "", "0");
+        totalContador.id = "contador-total";
+        totalContainer.appendChild(totalContador);
+
+        const contadorContainer = criarElemento("div", "contador-container");
+
+        function criarContador(tipo, iconeClasse) {
+            const container = criarElemento("div", "contador");
+            container.appendChild(criarElemento("i", `fa-solid ${iconeClasse}`));
+            container.appendChild(criarElemento("h3", "", tipo.charAt(0).toUpperCase() + tipo.slice(1)));
+            
+            const botoesContainer = criarElemento("div", "botao-container");
+            botoesContainer.appendChild(criarBotao("+", "btn-add", () => alterarContagem(tipo, "+")));
+            botoesContainer.appendChild(criarBotao("-", "btn-remove", () => alterarContagem(tipo, "-")));
+            
+            container.appendChild(botoesContainer);
+            
+            const contador = criarElemento("p", "", "0");
+            contador.id = `contador-${tipo}`;
+            container.appendChild(contador);
+            
+            return { container, contador };
+        }
+
+        const { container: homensContainer, contador: contadorHomens } = criarContador("homens", "fa-user-tie");
+        const { container: mulheresContainer, contador: contadorMulheres } = criarContador("mulheres", "fa-user");
+        
+        contadorContainer.appendChild(homensContainer);
+        contadorContainer.appendChild(mulheresContainer);
+        
+        app.appendChild(botaoReset);
+        app.appendChild(totalContainer);
+        app.appendChild(contadorContainer);
+    </script>
+</body>
+</html>
