@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f9fa;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        #app {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            text-align: center;
+        }
+
+        .display {
+            width: 100%;
+            height: 50px;
+            font-size: 1.5em;
+            text-align: right;
+            padding: 10px;
+            border: none;
+            background: #e9ecef;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        .botoes {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .botao {
+            width: 100%;
+            height: 60px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+            background-color: #397900;
+            color: white;
+            cursor: pointer;
+        }
+
+        .botao:hover {
+            background-color: #044d00;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script>
+        function criarCalculadora() {
+            const app = document.getElementById("app");
+            
+            const display = document.createElement("input");
+            display.className = "display";
+            display.setAttribute("readonly", "true");
+            app.appendChild(display);
+            
+            const botoesContainer = document.createElement("div");
+            botoesContainer.className = "botoes";
+            
+            const botoes = ["C",  "(", ")", " ", "7", "8", "9", "/", "4", "5", "6", "*", "1", "2", "3", "-", "0", ".", "=", "+"];
+            
+            botoes.forEach((text) => {
+                const botao = document.createElement("button");
+                botao.className = "botao";
+                botao.textContent = text;
+                botao.onclick = () => handleBotaoClick(text, display);
+                botoesContainer.appendChild(botao);
+            });
+            
+            app.appendChild(botoesContainer);
+        }
+        
+        function handleBotaoClick(value, display) {
+            if (value === "C") {
+                display.value = "";
+            } else if (value === "=") {
+                try {
+                    display.value = eval(display.value.replace(/%/g, '/100'));
+                } catch {
+                    display.value = "Erro";
+                }
+            } else {
+                display.value += value;
+            }
+        }
+        
+        criarCalculadora();
+    </script>
+</body>
+
+</html>
