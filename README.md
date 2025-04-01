@@ -3,6 +3,10 @@ Esse repositório foi criado para armazenar as atividades realizadas nas aulas d
 
 # Guia de páginas
 
-![Atividade 1](Semana1)
-![Atividade 2](Semana2)
-![Atividade 3](Semana3)
+![Semana 1](Semana1)
+![Semana 2](Semana2)
+![Semana 3](Semana3)
+![Semana 4](Semana4)
+![Semana 5](Semana5)
+![Semana 6](Semana6)
+![Semana 7](Semana7)
